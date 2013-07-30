@@ -1,0 +1,1 @@
+mex -v CC=g++ LD=g++ COPTIMFLAGS='-O3 -DNDEBUG' ../src/duifhuis.cpp ../src/duifhuis.h ../src/cochlea.cpp ../src/cochlea.h ../src/rk4.cpp ../src/rk4.h

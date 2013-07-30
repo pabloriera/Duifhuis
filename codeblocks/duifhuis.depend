@@ -1,0 +1,44 @@
+# depslib dependency file v1.0
+1374869752 source:/home/miles/Dropbox/Investigacion/Coclea-Models/Fluid-Ear/mexDuifhius/Cochlea2.cpp
+	<iostream>
+	"Cochlea2.h"
+	<math.h>
+	"rk4.h"
+
+1374790079 /home/miles/Dropbox/Investigacion/Coclea-Models/Fluid-Ear/mexDuifhius/Cochlea2.h
+	<vector>
+
+1374869043 /home/miles/Dropbox/Investigacion/Coclea-Models/Fluid-Ear/mexDuifhius/rk4.h
+	<iostream>
+	<vector>
+
+1374878134 source:/home/miles/Dropbox/Investigacion/Coclea-Models/Fluid-Ear/mexDuifhius/rk4.cpp
+
+1375212947 source:/home/miles/Dropbox/Investigacion/Coclea-Models/Fluid-Ear/mexDuifhius/main.cpp
+	<iostream>
+	<vector>
+	"duifhius.h"
+	<armadillo>
+
+1374881368 source:/home/miles/Dropbox/Investigacion/Coclea-Models/Fluid-Ear/mexDuifhius/Cochlea.cpp
+	<iostream>
+	"Cochlea.h"
+	<math.h>
+	"rk4.h"
+
+1374790079 /home/miles/Dropbox/Investigacion/Coclea-Models/Fluid-Ear/mexDuifhius/Cochlea.h
+	<vector>
+
+1375214460 /home/miles/Dropbox/Investigacion/Coclea-Models/Fluid-Ear/mexDuifhius/duifhius.h
+	"cochlea.h"
+	<cmath>
+	<armadillo>
+
+1375214033 /home/miles/Dropbox/Investigacion/Coclea-Models/Fluid-Ear/mexDuifhius/cochlea.h
+
+1375209847 source:/home/miles/Dropbox/Investigacion/Coclea-Models/Fluid-Ear/mexDuifhius/cochlea.cpp
+	<iostream>
+	"cochlea.h"
+	<math.h>
+	"rk4.h"
+
