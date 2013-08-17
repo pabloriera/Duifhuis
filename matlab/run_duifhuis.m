@@ -1,28 +1,27 @@
-clear all
+n_osc = 300;
+fs    = 1e5;
 
-n_osc = 100;
-n_t   = 10000;
-fs    = 1000000;
-
-dur = n_t/fs
-
+[Y fs2] = wavread('vowel.wav');
+Y = (Y(3:L)+Y(1:L-2)-2*Y(2:L-1));
+Y = Y(2000:5000);
+n_t2 = length(Y);
+n_t = ceil(fs*n_t2/fs2);
 t = (0:n_t-1)/fs;
-f0 = 1000;
-
-stimulus = 1*sin(2*pi*t*f0)';
-stimulus = stimulus.*tukeywin(n_t);
+t2 = (0:n_t2-1)/fs2;
+stimulus = interp1(t2,Y,t);
+n_t = length(stimulus);
+dur = n_t/fs
+stimulus = stimulus.*tukeywin(length(stimulus))';
 
 %%
+
+rho = 1000;
 tic
-X_t = duifhuis(n_osc, n_t, fs, stimulus);
+[Y_t V_t] = duifhuis(stimulus,fs,n_osc,rho);
 toc
 
+
 %%
-n_osc = size(X_t,1)/2;
-
-Y_t = X_t(1:n_osc,:);
-V_t = X_t(n_osc+1:end,:);
-
 figure(1453)
 
 subplot(3,1,1)
@@ -33,9 +32,9 @@ subplot(3,1,2)
 plot(stimulus)
 xlim([0 length(stimulus)])
 
+
 subplot(3,1,3)
 plot(10*log10(mean(Y_t(2:end,:).^2,2)))
-
 xlim( [1 size(Y_t,1)-1 ] )
 
 % figure(1454)
