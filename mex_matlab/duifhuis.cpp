@@ -22,7 +22,7 @@ void mexFunction( int nlhs, mxArray *plhs[],
     
     if (nrhs < 2 || nrhs > 5) {
         mexErrMsgIdAndTxt("MATLAB:Duifhius:nargin",
-                "Requires minimun two input arguments. Stimulus, fs, n_t, n_osc,rho, damping_coeffs" );
+                "Requires minimun two input arguments. Stimulus, fs, n_osc,rho, damping_coeffs" );
     }
     
     //Input parameters

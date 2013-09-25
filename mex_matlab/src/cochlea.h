@@ -49,13 +49,14 @@ class Cochlea_t
     int c,n_t;
     
     double AME,ASC,AHT,Asq;
-    double Scala_Area, scalaWidth, scalaHeight;
+    double scala_area, scala_width, scala_height;
     double phi, Asq0, gam0;
     double rho,bm_mass,bm_width;
     double dx, cochleaLength, bm_length;
     double bmMass, bmImpedanceFactor;
     double helicotremaWidth;
     double F0;
+    double dv1,dv3,dvy2,dy3;
     
     bool useGreenwoodMap;
     bool useConstantQ;

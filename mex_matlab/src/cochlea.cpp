@@ -34,15 +34,15 @@ void Cochlea_t::setup(int _n_osc,int _n_t, float fs, double* _stimulus, double* 
 
 void Cochlea_t::gaussian_elimination_init()
 {
-    Scala_Area = scalaWidth * scalaHeight;
-    Asq = 2 * rho * bm_width / (bm_mass * Scala_Area) * dx * dx;
+    scala_area = scala_width * scala_height;
+    Asq = 2 * rho * bm_width / (bm_mass * scala_area) * dx * dx;
 
     AME = 1 + (gam0 * Asq);
     ASC = 2 + Asq;
     AHT = 1 + Asq + sqrt(Asq);
 
     //frequency independent matching impedance when Qn=0,5
-    phi = 2 * rho * dx / Scala_Area * sqrt(sdivm[N-1]);	// sdivm is already the stiffness divided by the mass, so the m is removed from the formula
+    phi = 2 * rho * dx / scala_area * sqrt(sdivm[N-1]);	// sdivm is already the stiffness divided by the mass, so the m is removed from the formula
 
     Asq0 = gam0 * Asq;
 
@@ -125,7 +125,7 @@ void Cochlea_t::equations(int n, double X[], double dX[], double t )
 
     for(int i=1;i< N;i++)
     {
-        g[i] = V[i] * ddivm[i] + Y[i] * sdivm[i];
+        g[i] = (dv1*V[i] + dv3*V[i]*V[i]*V[i] + dvy2*V[i]*Y[i]*Y[i] ) * ddivm[i] + (Y[i] + dy3*Y[i]*Y[i]*Y[i])  * sdivm[i];
     }
 
 //COPMUTE q solving Aq = (k?);
@@ -267,16 +267,18 @@ void Cochlea_t::constants()
     cochleaLength                  = 36e-3;
     bmMass                         = 0.5;
     bmImpedanceFactor              = 1;
-    scalaWidth                     = 1e-3;
-    scalaHeight                    = 1e-3;
+    scala_width                    = 1e-3;
+    scala_height                   = 1e-3;
     helicotremaWidth               = 1e-3;
     rho                            = 1000;
     ConstantQ                      = 20;
+    
     f_base_exp_map                 = 22507;
     kappa_exp_map                  = 65.1;
     f_base_Greenwood_map           = 20682;
     kappa_Greenwood_map            = 60;
     apex_corr_Greenwood_map        = 140.59;
+    
     stapesArea                     = 3e-6;
     EardrumArea                    = 60e-6;
     MiddleEarResonanceFrequency    = 2e3;
@@ -286,14 +288,20 @@ void Cochlea_t::constants()
     damping_coupler                = 140e5;
     mass_coupler                   = 43.4e2;
     stiffness_coupler              = 1/2.28e-11;
+    
     p0                             = 2e-5;
+    dv1                            = 1;
+    dv3                            = 0;
+    dvy2                            = 0;
+    dy3                            = 0;
+    
 }
 
 void Cochlea_t::parameters()
 {
     //VARIABLES
     bm_length = cochleaLength - helicotremaWidth;
-    bm_width  = scalaWidth;
+    bm_width  = scala_width;
     bm_mass   = bmMass * bmImpedanceFactor;
     dx = bm_length /(double) N;
 
@@ -341,8 +349,8 @@ void Cochlea_t::parameters()
      * bmMass(2)             = [0.5d0, 0.25d0]	!kg/m2
      * bmImpedanceFactor(2)	= [1d0, 0.75d0]     !dimensionless
      * !bmInpedanceFactor: scaling factor which enables overall parameter adjustments. Default: := 1
-     * scalaWidth(2)         = [1d-3, 0.5d-3]	!m
-     * scalaHeight(2)        = [1d-3, 0.5d-3]	!m
+     * scala_width(2)         = [1d-3, 0.5d-3]	!m
+     * scala_height(2)        = [1d-3, 0.5d-3]	!m
      * helicotremaWidth(2)   = [1d-3, 0.5d-3]	!m  note: also used for helicotremalength
      * rho                   = 1d3		        !kg/m3
      * rho: average density of cochlear fluid, approx. equal to density of water
